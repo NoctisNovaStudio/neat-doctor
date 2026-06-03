@@ -1,4 +1,4 @@
-/**
+﻿/**
  * ui.js — neat-doctor
  * Score box, issue list, agent prompt builder, dashboard orchestrator.
  */
@@ -29,7 +29,7 @@ const RULE_META = {
     realWorld:
       "A flat root with 20 .tsx files means no clear separation between 'configuration layer' " +
       "and 'application layer' — every new developer is immediately confused about where things go.",
-    docs: "https://noctisnova.com/docs/structure/root-organisation",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   "duplicate-concept": {
@@ -45,7 +45,7 @@ const RULE_META = {
     realWorld:
       "Having utils/, helpers/, and shared/ means a new developer writing a date formatting function " +
       "asks: which folder? They guess wrong, and now your utilities are spread across three locations.",
-    docs: "https://noctisnova.com/docs/structure/duplicate-concepts",
+    docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
   },
 
   "deep-nesting": {
@@ -61,7 +61,7 @@ const RULE_META = {
     realWorld:
       "Moving a file 6 levels deep requires updating every import in every file that used it — " +
       "which can be dozens of files. Flat structures are dramatically easier to refactor.",
-    docs: "https://noctisnova.com/docs/structure/deep-nesting",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   "fat-folder": {
@@ -77,7 +77,7 @@ const RULE_META = {
     realWorld:
       "A components/ folder with 40 files forces every developer to visually scan the entire list. " +
       "Splitting into components/ui/, components/layout/, components/forms/ makes intent clear instantly.",
-    docs: "https://noctisnova.com/docs/structure/fat-folders",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   "misplaced-file": {
@@ -93,7 +93,7 @@ const RULE_META = {
     realWorld:
       "A .tsx component inside utils/ means the next developer searching for 'UI components' " +
       "won't find it — they'll create a duplicate. And imports from utils/ feel wrong.",
-    docs: "https://noctisnova.com/docs/structure/file-placement",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   "naming-mismatch": {
@@ -110,7 +110,7 @@ const RULE_META = {
       "A team member writes `import { formatDate } from './Format-Date'` — wrong case. " +
       "Works on macOS (case-insensitive FS) but crashes in production on Linux (case-sensitive). " +
       "Naming consistency prevents entire class of deployment bugs.",
-    docs: "https://noctisnova.com/docs/structure/naming-conventions",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   "missing-barrel": {
@@ -126,7 +126,7 @@ const RULE_META = {
     realWorld:
       "When you rename Button.tsx to PrimaryButton.tsx, you update 1 barrel file. Without a barrel, " +
       "you update every import across every file in the project — potentially dozens of changes.",
-    docs: "https://noctisnova.com/docs/structure/barrel-files",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   "scattered-config": {
@@ -142,7 +142,7 @@ const RULE_META = {
     realWorld:
       "A jest.config.ts inside src/config/ might never be picked up by Jest's root-level search, " +
       "causing your entire test suite to run with the wrong configuration — no error, just silent failure.",
-    docs: "https://noctisnova.com/docs/structure/config-placement",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   "empty-dir": {
@@ -157,7 +157,7 @@ const RULE_META = {
       "wonders if they're missing something.",
     realWorld: "Empty folders inflate the apparent complexity of a project. New developers feel " +
       "the project is bigger and more complex than it is — before they've read a single line of code.",
-    docs: "https://noctisnova.com/docs/structure/empty-dirs",
+    docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
   },
 
   // ── Advanced import-dependency-graph rules ────────────────────────────────
@@ -176,7 +176,7 @@ const RULE_META = {
       "A → B → A cycle throws 'Cannot access B before initialization' at runtime — but only " +
       "sometimes, depending on which file the bundler loads first. These are nightmare bugs to " +
       "reproduce because they're sensitive to import order.",
-    docs: "https://noctisnova.com/docs/structure/circular-dependencies",
+    docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
   },
 
   "orphan-file": {
@@ -192,7 +192,7 @@ const RULE_META = {
     realWorld:
       "An old helpers/legacy-parser.ts that nothing imports still shows up in search results, " +
       "still gets reviewed in PRs, and still confuses every developer who finds it — for zero benefit.",
-    docs: "https://noctisnova.com/docs/structure/orphan-files",
+    docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
   },
 
   "god-file": {
@@ -208,7 +208,7 @@ const RULE_META = {
     realWorld:
       "A 900-line utils.ts that imports 40 things is touched by every feature branch — so it's " +
       "in every merge conflict. Splitting it into focused modules means teams stop stepping on each other.",
-    docs: "https://noctisnova.com/docs/structure/god-files",
+    docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
   },
 
   "deep-relative-import": {
@@ -224,7 +224,7 @@ const RULE_META = {
     realWorld:
       "import { db } from '../../../../lib/db' breaks the moment you move the file one folder. " +
       "With '@/lib/db' you can move files freely and the import never changes.",
-    docs: "https://noctisnova.com/docs/structure/path-aliases",
+    docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
   },
 };
 
@@ -335,7 +335,7 @@ export function renderIssueList(issues, { colour = true } = {}) {
     const ruleIssues = grouped[rule];
     const meta = RULE_META[rule] ?? {
       badge: "INFO", badgeFn: (s) => `[${s}]`, category: "Structure",
-      label: rule, explanation: "", realWorld: "", docs: "https://noctisnova.com/docs/structure",
+      label: rule, explanation: "", realWorld: "", docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
     };
 
     const count    = ruleIssues.length;

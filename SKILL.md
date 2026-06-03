@@ -1,4 +1,4 @@
----
+﻿---
 name: neat-doctor
 version: 1.0.0
 publisher: NoctisNova
@@ -211,8 +211,8 @@ curl -H "Accept: text/markdown" https://noctisnova.com/tools/neat-doctor/project
 | Resource | URL |
 |---|---|
 | NoctisNova | https://noctisnova.com |
-| Structure guide | https://noctisnova.com/docs/structure |
-| Naming conventions | https://noctisnova.com/docs/structure/naming-conventions |
-| Barrel files | https://noctisnova.com/docs/structure/barrel-files |
-| Path aliases | https://noctisnova.com/docs/structure/path-aliases |
-| Migration playbook | https://noctisnova.com/docs/structure/migration |
+| Structure guide | https://noctisnova.com/tools/neat-doctor |
+| Naming conventions | https://noctisnova.com/tools/neat-doctor/project-structure-guide |
+| Barrel files | https://noctisnova.com/tools/neat-doctor/project-structure-guide |
+| Path aliases | https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis |
+| Migration playbook | https://noctisnova.com/tools/neat-doctor/project-structure-guide |

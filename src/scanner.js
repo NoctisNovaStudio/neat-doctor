@@ -1,4 +1,4 @@
-/**
+﻿/**
  * scanner.js — neat-doctor
  * Analyses project folder structure for organisation anti-patterns:
  * deep nesting, fat folders, naming inconsistency, misplaced files,
@@ -243,7 +243,7 @@ export async function scanDeepNesting(projectPath) {
         `Folder is ${depth} levels deep (limit: ${MAX_DEPTH}). ` +
         "Deep nesting forces long import paths like ../../../../lib/utils — " +
         "flatten the structure or use path aliases.",
-      docs: "https://noctisnova.com/docs/structure/deep-nesting",
+      docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
       penalty: PENALTY_DEEP_NESTING,
       depth,
     });
@@ -277,7 +277,7 @@ export async function scanFatFolders(projectPath) {
       message:
         `\`${relPath || "."}\` contains ${files.length} files with no sub-grouping. ` +
         "Group related files into subdirectories (e.g. components/forms/, components/layout/, components/ui/).",
-      docs: "https://noctisnova.com/docs/structure/fat-folders",
+      docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
       penalty: PENALTY_FAT_FOLDER,
       fileCount: files.length,
     });
@@ -327,7 +327,7 @@ export async function scanNamingInconsistency(projectPath) {
         message:
           `Subfolders in \`${relPath || "."}\` use mixed naming styles: ${[...uniqueFolderStyles].join(" and ")}. ` +
           "Pick one convention (prefer kebab-case for folders) and rename everything to match.",
-        docs: "https://noctisnova.com/docs/structure/naming-conventions",
+        docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
         penalty: PENALTY_NAMING_MISMATCH,
         styles: [...uniqueFolderStyles],
       });
@@ -360,7 +360,7 @@ export async function scanNamingInconsistency(projectPath) {
         message:
           `Source files in \`${relPath || "."}\` mix PascalCase and kebab/camelCase. ` +
           "Use PascalCase for React components (Button.tsx), kebab-case for utilities (format-date.ts).",
-        docs: "https://noctisnova.com/docs/structure/naming-conventions",
+        docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
         penalty: PENALTY_NAMING_MISMATCH,
       });
     }
@@ -402,7 +402,7 @@ export async function scanMisplacedFiles(projectPath) {
             line: 1,
             snippet: e.name,
             message: rule.reason,
-            docs: "https://noctisnova.com/docs/structure/file-placement",
+            docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
             penalty: PENALTY_MISPLACED_FILE,
           });
           break;
@@ -449,7 +449,7 @@ export async function scanMissingBarrels(projectPath) {
         `\`${relPath}\` has ${sourceFiles.length} source files but no \`index.ts\` barrel. ` +
         "A barrel file lets consumers import from '@/components' instead of '@/components/Button/Button' " +
         "— cleaner imports, single place to manage the public API.",
-      docs: "https://noctisnova.com/docs/structure/barrel-files",
+      docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
       penalty: PENALTY_MISSING_BARREL,
       sourceFileCount: sourceFiles.length,
     });
@@ -485,7 +485,7 @@ export async function scanDuplicateConcepts(projectPath) {
         message:
           `\`${relPath || "."}\` has multiple folders for the same concept: ${found.map((n) => `\`${n}/\``).join(", ")}. ` +
           "Consolidate into one canonical name — pick the most specific and move everything there.",
-        docs: "https://noctisnova.com/docs/structure/duplicate-concepts",
+        docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
         penalty: PENALTY_DUPLICATE_CONCEPT,
         duplicates: found,
       });
@@ -519,7 +519,7 @@ export async function scanEmptyDirectories(projectPath) {
       snippet: "(empty)",
       message:
         `\`${relPath}\` is completely empty. Remove it — empty folders create noise in the file tree.`,
-      docs: "https://noctisnova.com/docs/structure/empty-dirs",
+      docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
       penalty: PENALTY_EMPTY_DIR,
     });
   }
@@ -560,7 +560,7 @@ export async function scanRootChaos(projectPath) {
         `${rootSourceFiles.length} source files sitting directly in the project root. ` +
         "Move them into a src/ or app/ directory — the root should contain only config files " +
         "(package.json, tsconfig.json, next.config.ts, README.md) and nothing else.",
-      docs: "https://noctisnova.com/docs/structure/root-organisation",
+      docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
       penalty: PENALTY_ROOT_CHAOS,
     });
   }
@@ -600,7 +600,7 @@ export async function scanScatteredConfig(projectPath) {
           message:
             `Config file \`${e.name}\` is nested ${depth} level${depth !== 1 ? "s" : ""} deep (${relPath}). ` +
             "Config files should live at the project root where tooling expects them.",
-          docs: "https://noctisnova.com/docs/structure/config-placement",
+          docs: "https://noctisnova.com/tools/neat-doctor/project-structure-guide",
           penalty: PENALTY_SCATTERED_CONFIG,
         });
       }

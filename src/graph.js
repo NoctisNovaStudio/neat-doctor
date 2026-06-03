@@ -1,4 +1,4 @@
-/**
+﻿/**
  * graph.js — neat-doctor
  *
  * The advanced engine. Builds a real import-dependency graph of the project
@@ -369,7 +369,7 @@ function makeCycleIssue(rels, file) {
       `Import cycle between ${rels.length} file${rels.length !== 1 ? "s" : ""}: ${chain.join(" ↔ ")}. ` +
       "Circular imports cause undefined-at-runtime bugs, break tree-shaking, and can crash with " +
       "'Cannot access X before initialization'. Extract the shared piece into a third module both can import.",
-    docs: "https://noctisnova.com/docs/structure/circular-dependencies",
+    docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
     penalty: PENALTY_CIRCULAR,
     cycle: rels,
   };
@@ -405,7 +405,7 @@ export function findOrphanFiles(graph) {
       message:
         `\`${node.rel}\` exports code but is imported by nothing and isn't an entry point. ` +
         "It's almost certainly dead — left behind by a refactor. Confirm it's unused, then delete it.",
-      docs: "https://noctisnova.com/docs/structure/orphan-files",
+      docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
       penalty: PENALTY_ORPHAN,
     });
   }
@@ -438,7 +438,7 @@ export function findGodFiles(graph) {
         `\`${node.rel}\` is doing too much (${reasons.join(", ")}). ` +
         "Large, highly-coupled files are hard to test, review, and reuse. Split it into focused " +
         "modules grouped by responsibility.",
-      docs: "https://noctisnova.com/docs/structure/god-files",
+      docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
       penalty: PENALTY_GOD_FILE,
       loc: node.loc,
       importCount: node.importCount,
@@ -469,7 +469,7 @@ export function findDeepRelativeImports(graph) {
         `\`${node.rel}\` reaches across ${worst.deep} directory levels with \`${worst.spec}\`. ` +
         "Long ../../../ chains are brittle — one folder move breaks them all. Add a tsconfig path " +
         "alias (e.g. '@/*': ['./src/*']) and import from '@/...' instead.",
-      docs: "https://noctisnova.com/docs/structure/path-aliases",
+      docs: "https://noctisnova.com/tools/neat-doctor/advanced-architecture-analysis",
       penalty: PENALTY_DEEP_IMPORT,
       deep: worst.deep,
     });
