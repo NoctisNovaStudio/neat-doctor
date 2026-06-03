@@ -1,0 +1,50 @@
+{
+  "name": "neat-doctor",
+  "version": "1.0.1",
+  "description": "Code structure analyser with a real import-dependency-graph engine. Finds messy folders, fat directories, naming drift, misplaced/orphan/god files, circular dependencies, and deep imports — then generates safe git-mv migration scripts to fix them.",
+  "type": "module",
+  "bin": {
+    "neat-doctor": "./index.js"
+  },
+  "main": "./index.js",
+  "files": [
+    "index.js",
+    "src/"
+  ],
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "code-organization",
+    "project-structure",
+    "dependency-graph",
+    "circular-dependency",
+    "dead-code",
+    "nextjs",
+    "typescript",
+    "static-analysis",
+    "cli",
+    "refactoring",
+    "noctisnova"
+  ],
+  "author": "NoctisNova <hello@noctisnova.com> (https://noctisnova.com)",
+  "homepage": "https://noctisnova.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/noctisnova/neat-doctor"
+  },
+  "bugs": {
+    "url": "https://github.com/noctisnova/neat-doctor/issues",
+    "email": "hello@noctisnova.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^0.9.1",
+    "boxen": "^8.0.1",
+    "chalk": "^5.4.1",
+    "clipboardy": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
