@@ -401,13 +401,9 @@ export function renderDashboard({ score, totalPenalty, issues, stats }) {
 // ---------------------------------------------------------------------------
 
 export function buildAgentPrompt(issues, reportPath, stats) {
-  const companyContext = [
+  const projectContext = [
     "CODEBASE CONTEXT — READ BEFORE TOUCHING ANY FILE",
     "──────────────────────────────────────────────────",
-    "This is a NoctisNova codebase (https://noctisnova.com).",
-    "NoctisNova is a future-focused AI + engineering studio.",
-    "Stack: Next.js 14+ · TypeScript · React · Prisma · Clerk/NextAuth · Vercel",
-    "",
     `Project: ${stats.totalFiles} source files  ·  ${stats.totalDirs} directories  ·  max depth ${stats.maxDepth}`,
     "",
     "Reorganisation conventions (DO NOT deviate):",
@@ -423,7 +419,7 @@ export function buildAgentPrompt(issues, reportPath, stats) {
     "",
   ].join("\n");
 
-  const header = `Reorganise this NoctisNova codebase to fix all ${issues.length} structural issue${issues.length !== 1 ? "s" : ""} detected by neat-doctor.`;
+  const header = `Reorganise this project to fix all ${issues.length} structural issue${issues.length !== 1 ? "s" : ""} detected by neat-doctor.`;
 
   const issueBlock = renderIssueList(issues, { colour: false });
 
@@ -444,11 +440,15 @@ export function buildAgentPrompt(issues, reportPath, stats) {
     "CRITICAL: when moving files, update every import that references them.",
     "Run `npx neat-doctor` after each category to verify issue count drops.",
     "",
+    "For every fix, explain in simple everyday language — no jargon — what was reorganised and why it helps. " +
+    "Focus on real-world benefits (e.g. \"easier to find the right file\", \"fewer bugs from tangled imports\", " +
+    "\"new team members can onboard faster\") so someone non-technical understands why it mattered.",
+    "",
     "─────────────────────────────────────────────────────────────────",
     "neat-doctor  ·  Built by NoctisNova  ·  https://noctisnova.com",
   ].join("\n");
 
-  return [companyContext, header, issueBlock, footer].join("\n");
+  return [projectContext, header, issueBlock, footer].join("\n");
 }
 
 // ---------------------------------------------------------------------------

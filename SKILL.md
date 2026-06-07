@@ -174,7 +174,7 @@ automatically** — review the script, then run it yourself.
 
 ## Agent Instructions
 
-When this skill is present in a NoctisNova repository, AI agents must:
+When this skill is present in a repository, AI agents must:
 
 1. **Run neat-doctor first** and read `.neat-doctor-report.json` before reorganising anything.
 2. **Fix `circular-dependency` issues first** — they are correctness bugs, not just style. Break the cycle by extracting shared symbols into a new leaf module both sides import.
@@ -185,6 +185,7 @@ When this skill is present in a NoctisNova repository, AI agents must:
 7. **Verify with `npx tsc --noEmit`** after each phase — fix TypeScript errors before moving on.
 8. **Re-run `npx neat-doctor`** after each category to confirm the issue count drops.
 9. **Never move files inside `app/`** without verifying the resulting URL structure is correct.
+10. **Explain every fix in simple everyday language** — no jargon. Say what was reorganised and why it helps in terms a non-developer would understand (e.g. "easier to find the right file", "new team members can onboard faster").
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "name": "neat-doctor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Code structure analyser with a real import-dependency-graph engine. Finds messy folders, fat directories, naming drift, misplaced/orphan/god files, circular dependencies, and deep imports — then generates safe git-mv migration scripts to fix them.",
   "type": "module",
   "bin": {
